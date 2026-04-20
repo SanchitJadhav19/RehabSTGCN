@@ -1,0 +1,1 @@
+from .skeleton_extractor import extract_skeleton_from_video

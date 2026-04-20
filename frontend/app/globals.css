@@ -1,0 +1,355 @@
+/* 
+ * globals.css
+ * Premium Stitch-style design system for the RehabSTGCN application.
+ * Features dark mode aesthetics, glassmorphism, and smooth animations.
+ */
+
+:root {
+  --bg-color: #0f172a;        /* Slate 900 */
+  --card-bg: #1e293b;         /* Slate 800 */
+  --card-border: #334155;     /* Slate 700 */
+  --text-main: #f8fafc;       /* Slate 50 */
+  --text-muted: #94a3b8;      /* Slate 400 */
+  --primary: #3b82f6;         /* Blue 500 */
+  --primary-hover: #2563eb;   /* Blue 600 */
+  --accent: #8b5cf6;          /* Violet 500 */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --radius-lg: 16px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.result-card {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-card h3 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.feature-list {
+  padding-left: 1.5rem;
+  color: var(--text-muted);
+}
+
+.feature-list li {
+  margin-bottom: 0.5rem;
+}
+
+.feature-list strong {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Video Upload Component
+   ========================================================================== */
+.upload-container {
+  margin-bottom: 1.5rem;
+}
+
+.upload-dropzone {
+  border: 2px dashed var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(51, 65, 85, 0.3);
+}
+
+.upload-dropzone:hover, .upload-dropzone.dragging {
+  border-color: var(--primary);
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.upload-dropzone.has-preview {
+  padding: 1rem;
+  border-style: solid;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.supported-formats {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.video-preview {
+  width: 100%;
+  max-height: 250px;
+  border-radius: var(--radius-md);
+  background-color: #000;
+  margin-bottom: 1rem;
+}
+
+.file-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.change-hint {
+  color: var(--primary);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.analyze-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.1s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.analyze-btn:hover:not(.disabled) {
+  opacity: 0.9;
+}
+
+.analyze-btn:active:not(.disabled) {
+  transform: translateY(1px);
+}
+
+.analyze-btn.disabled {
+  background: var(--card-border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Score Display Component
+   ========================================================================== */
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.score-title {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.score-gauge {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-value {
+  position: absolute;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+.score-max {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.score-label {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Attention Graph Component
+   ========================================================================== */
+.attention-container {
+  width: 100%;
+}
+
+.attention-header {
+  margin-bottom: 1rem;
+}
+
+.attention-header h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.attention-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.attention-subtitle strong {
+  color: var(--text-main);
+}
+
+.recharts-wrapper {
+  font-family: inherit !important;
+}
+
+/* ==========================================================================
+   Utils
+   ========================================================================== */
+.divider {
+  height: 1px;
+  background-color: var(--card-border);
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.meta-info {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+  color: #fca5a5;
+  font-size: 0.9rem;
+}
+
+.empty-state {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
