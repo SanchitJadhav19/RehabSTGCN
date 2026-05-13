@@ -4,10 +4,10 @@
  * ScoreDisplayComponent
  * 
  * Displays the predicted rehabilitation quality score as an animated
- * circular gauge with color coding. Score range: 0-100.
+ * circular gauge with color coding. Score range: 0-50.
  * 
  * Props:
- *   score: number (0-100)
+ *   score: number (0-50)
  *   loading: boolean
  */
 export default function ScoreDisplayComponent({ score, loading }) {
@@ -25,23 +25,23 @@ export default function ScoreDisplayComponent({ score, loading }) {
 
   if (score === null || score === undefined) return null;
 
-  // Color based on score (0-100 range)
+  // Color based on score (0-50 range)
   const getColor = (s) => {
-    if (s >= 70) return '#10b981';  // green — good
-    if (s >= 40) return '#f59e0b';  // yellow — moderate
+    if (s >= 35) return '#10b981';  // green — good
+    if (s >= 20) return '#f59e0b';  // yellow — moderate
     return '#ef4444';              // red — needs improvement
   };
 
   const getLabel = (s) => {
-    if (s >= 80) return 'Excellent';
-    if (s >= 60) return 'Good';
-    if (s >= 40) return 'Fair';
-    if (s >= 20) return 'Needs Improvement';
+    if (s >= 40) return 'Excellent';
+    if (s >= 30) return 'Good';
+    if (s >= 20) return 'Fair';
+    if (s >= 10) return 'Needs Improvement';
     return 'Poor';
   };
 
   const color = getColor(score);
-  const percentage = Math.min(Math.max(score / 100, 0), 1) * 100;
+  const percentage = Math.min(Math.max(score / 50, 0), 1) * 100;
 
   // SVG circular gauge
   const radius = 70;
@@ -73,7 +73,7 @@ export default function ScoreDisplayComponent({ score, loading }) {
 
         <div className="score-value" style={{ color }}>
           <span className="score-number">{score.toFixed(1)}</span>
-          <span className="score-max">/100</span>
+          <span className="score-max">/50</span>
         </div>
       </div>
 

@@ -11,6 +11,7 @@ numpy arrays ready for the STGCN-LSTM model (instead of writing CSV).
 import cv2
 import mediapipe as mp
 import numpy as np
+import csv
 
 # Initialize MediaPipe Pose
 mp_pose = mp.solutions.pose
@@ -67,12 +68,13 @@ def get_kinect_joints(landmarks):
     return kj
 
 
-def extract_skeleton_from_video(video_path):
+def extract_skeleton_from_video(video_path, output_csv_path=None):
     """
     Extract 25-joint skeleton data from a video file.
     
     Args:
         video_path: Path to the video file
+        output_csv_path: Optional path to save extracted coordinates as CSV
         
     Returns:
         skeleton_data: np.array of shape (num_frames, 100) 
@@ -141,6 +143,13 @@ def extract_skeleton_from_video(video_path):
     skeleton_data = np.array(all_rows, dtype=np.float32)
     metadata['detected_frames'] = len(all_rows)
     metadata['frame_confidences'] = frame_confidences
+
+    # Save to CSV if requested
+    if output_csv_path and len(all_rows) > 0:
+        print(f"[SkeletonExtractor] Saving coordinates to: {output_csv_path}")
+        with open(output_csv_path, mode='w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerows(all_rows)
 
     print(f"[SkeletonExtractor] Extracted {len(all_rows)} frames from video")
     return skeleton_data, metadata

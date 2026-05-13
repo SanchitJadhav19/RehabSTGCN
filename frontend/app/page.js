@@ -51,7 +51,7 @@ export default function Home() {
     <main className="container">
       <header className="header">
         <h1>RehabSTGCN Assessment System</h1>
-        <p className="subtitle">AI-powered clinical exercise quality scoring using STGCN-LSTM</p>
+
       </header>
 
       <div className="layout-grid">
@@ -83,7 +83,7 @@ export default function Home() {
               <li><strong>MediaPipe</strong> extracts 25 Kinect v2 skeletal joints</li>
               <li><strong>ST-GCN</strong> analyzes spatial joint relationships via graph convolutions</li>
               <li><strong>LSTM</strong> captures temporal movement patterns</li>
-              <li><strong>Score</strong> predicts rehabilitation exercise quality (0-100)</li>
+              <li><strong>Score</strong> predicts rehabilitation exercise quality (0-50)</li>
             </ul>
           </div>
         </div>

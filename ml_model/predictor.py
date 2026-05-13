@@ -62,23 +62,24 @@ class RehabPredictor:
     End-to-end predictor: Video → Skeleton → Score.
     
     Usage:
-        predictor = RehabPredictor('/path/to/pretrained/')
+        predictor = RehabPredictor('/path/to/trained/')
         result = predictor.predict_from_video('/path/to/video.mp4')
     """
 
-    def __init__(self, pretrained_dir=None):
+    def __init__(self, trained_dir=None):
         """
         Args:
-            pretrained_dir: Directory containing best_model.hdf5, sc_x.save, sc_y.save
+            trained_dir: Directory containing best_model.hdf5, sc_x.save, sc_y.save
         """
-        if pretrained_dir is None:
-            pretrained_dir = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), 'pretrained'
+        if trained_dir is None:
+            trained_dir = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), 'trained'
             )
+        self.trained_dir = trained_dir
 
-        weights_path = os.path.join(pretrained_dir, 'best_model.hdf5')
-        sc_x_path = os.path.join(pretrained_dir, 'sc_x.save')
-        sc_y_path = os.path.join(pretrained_dir, 'sc_y.save')
+        weights_path = os.path.join(trained_dir, 'best_model.hdf5')
+        sc_x_path = os.path.join(trained_dir, 'sc_x.save')
+        sc_y_path = os.path.join(trained_dir, 'sc_y.save')
 
         # Validate files exist
         for path, name in [(weights_path, 'Model weights'), 
@@ -171,8 +172,9 @@ class RehabPredictor:
                 - video_info: dict (fps, resolution, etc.)
         """
         # Step 1: Extract skeleton
+        csv_path = os.path.join(self.trained_dir, 'input.csv')
         print(f"[RehabPredictor] Extracting skeleton from: {video_path}")
-        skeleton_data, metadata = extract_skeleton_from_video(video_path)
+        skeleton_data, metadata = extract_skeleton_from_video(video_path, output_csv_path=csv_path)
 
         # Step 2: Run model
         print(f"[RehabPredictor] Running STGCN-LSTM inference...")

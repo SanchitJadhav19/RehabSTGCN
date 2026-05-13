@@ -46,7 +46,7 @@ app.add_middleware(
 )
 
 # Load model once at startup
-PRETRAINED_DIR = os.path.join(PROJECT_ROOT, "ml_model", "pretrained")
+TRAINED_DIR = os.path.join(PROJECT_ROOT, "ml_model", "trained")
 predictor = None
 
 
@@ -54,11 +54,11 @@ predictor = None
 async def load_model():
     global predictor
     try:
-        predictor = RehabPredictor(PRETRAINED_DIR)
+        predictor = RehabPredictor(TRAINED_DIR)
         print("[Backend] STGCN-LSTM model loaded successfully!")
     except FileNotFoundError as e:
         print(f"[Backend] WARNING: {e}")
-        print("[Backend] Ensure pretrained files exist in ml_model/pretrained/")
+        print("[Backend] Ensure trained files exist in ml_model/trained/")
     except Exception as e:
         print(f"[Backend] Model load error: {e}")
         traceback.print_exc()
@@ -99,7 +99,7 @@ async def predict_exercise(video: UploadFile = File(...)):
     if predictor is None:
         raise HTTPException(
             status_code=503,
-            detail="Model not loaded. Ensure pretrained files exist in ml_model/pretrained/"
+            detail="Model not loaded. Ensure trained files exist in ml_model/trained/"
         )
 
     # Validate file type
